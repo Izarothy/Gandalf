@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-
+const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
 client.once('ready', () => {
@@ -17,14 +17,13 @@ const LegolasEmbed = new Discord.MessageEmbed()
     .setImage('https://i.pinimg.com/originals/07/31/37/0731379032530492cec0984f06bf1318.jpg')
 
 client.on('message', message => {
-    if (message.content === '!aragorn') {
+    if (message.content === `${prefix}aragorn`) {
         message.channel.send(AragornEmbed);
     }
-    if (message.content === '!legolas') {
+    if (message.content === `${prefix}legolas`) {
         message.channel.send(LegolasEmbed);
-
     }
 
 });
 
-client.login('Nzk1MzA2MDAzMjkzMjc0MTEy.X_Hcbw.j1rtIFheIYw1HC01wOtW2cn-SYw');
+client.login(token)
