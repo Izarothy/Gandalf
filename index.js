@@ -13,7 +13,7 @@ const AragornEmbed = new Discord.MessageEmbed()
 
 const LegolasEmbed = new Discord.MessageEmbed()
     .setTitle('Legolas')
-    .setDescription('Legolas, syn Thranduila, był elfickim księciem z Mrocznej Puszczy. Wyruszył w podróż razem z Drużyną Pierścienia, żeby zniszczyć Jedyny Pierścień.')
+    .setDescription('Legolas, syn Thranduila, był elfickim księciem z Mrocznej Puszczy. Wyruszył w podróż razem z Drużyną Pierścienia, żeby zniszczyć Jedyny Pierścień. Jako elf miał doskonały wzrok, tym samym znacznie przysługując się Drużynie. Zaprzyjaźnił się z Gimlim pomimo różnic, jakie dzieliły ich rasy. Nic nie wiemy o jego matce. Na spotkanie u Elronda przyszedł jako wysłannik ojca. Po zakończeniu Wojny o Pierścień został na koronacji Aragorna i po zwiedzeniu wraz z Gimlim jaskiń Helmowego Jaru i Fangornu odpłynął do Amanu. ')
     .setImage('https://i.pinimg.com/originals/07/31/37/0731379032530492cec0984f06bf1318.jpg')
 
 client.on('message', message => {
