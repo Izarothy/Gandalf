@@ -20,17 +20,11 @@ client.on('message', message => {
     if (message.content === '!aragorn') {
         message.channel.send(AragornEmbed);
     }
+    if (message.content === '!legolas') {
+        message.channel.send(LegolasEmbed);
 
-    client.on('message', message => {
-        if (message.content === '!legolas') {
-            message.channel.send(LegolasEmbed);
-        }
-    })
-    client.on('message', message => {
-        if (message.content === '!ping') {
-            message.channel.send('Bonk');
-        }
-    })
+    }
+
 });
 
 client.login('Nzk1MzA2MDAzMjkzMjc0MTEy.X_Hcbw.j1rtIFheIYw1HC01wOtW2cn-SYw');
