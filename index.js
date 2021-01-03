@@ -34,7 +34,7 @@ client.on('message', message => {
     if (message.content.startsWith(`${prefix}legolas`)) {
         message.channel.send(LegolasEmbed);
     }
-    if (message.content.startsWith(`${prefix}Gimli`)) {
+    if (message.content.startsWith(`${prefix}gimli`)) {
         message.channel.send(GimliEmbed);
     }
 
