@@ -23,7 +23,7 @@ client.on('message', message => {
 
     client.on('message', message => {
         if (message.content === '!legolas') {
-            message.channel.send(LegolasEmbed)
+            message.channel.send(LegolasEmbed);
         }
     })
 });
