@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-    name: 'Frodo',
+    name: 'frodo',
     description: 'Frodo embed',
     execute(message, args) {
         const Discord = require('discord.js');
