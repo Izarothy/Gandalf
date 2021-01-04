@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const fs = require('fs');
 const Discord = require('discord.js');
+const config = require('./config.json');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -13,7 +14,7 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 var schedule = require('node-schedule');
-var date = new Date(2021, 0, 4, 16, 10, 0);
+var date = new Date(2021, 0, 4, 16, 12, 0);
 
 client.once('ready', () => {
     console.log('Ready!');
@@ -38,5 +39,4 @@ client.on('message', message => {
         message.reply('there was an error trying to execute that command!');
     }
 });
-
-client.login(token)
+client.login(config.token)
