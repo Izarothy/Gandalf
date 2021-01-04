@@ -21,7 +21,7 @@ client.once('ready', () => {
 });
 
 var j = schedule.scheduleJob(date, function() {
-    client.channels.cache.get('781283271635632138').send('**1. Czy skład Drużyny Pierścienia - wielkościowo i jeśli chodzi o poszczególne postaci był odpowiedni?**');
+    client.channels.cache.get('781283271635632138').send('');
 })
 
 client.on('message', message => {
