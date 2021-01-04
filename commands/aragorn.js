@@ -10,5 +10,6 @@ module.exports = {
             .setImage('https://www.indiewire.com/wp-content/uploads/2017/11/aragon-the-lord-of-the-rings.jpg')
             .setFooter('Tawerna Fantastyki, Sekcja Śródziemia')
             .setThumbnail('https://cdn.discordapp.com/attachments/484655342400307211/795401844112883742/pierscien.png')
+        message.channel.send(AragornEmbed);
     },
 };
