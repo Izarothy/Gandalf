@@ -14,7 +14,7 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 var schedule = require('node-schedule');
-var date = new Date(2021, 0, 5, 16, 12, 0);
+var date = new Date(2021, 0, 5, 15, 0, 0);
 
 client.once('ready', () => {
     console.log('Ready!');
