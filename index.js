@@ -14,17 +14,18 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 var schedule = require('node-schedule');
-var date = new Date(2021, 0, 4, 16, 12, 0);
+var date = new Date(2021, 0, 5, 16, 12, 0);
 
 client.once('ready', () => {
     console.log('Ready!');
 });
 
 var j = schedule.scheduleJob(date, function() {
-    client.channels.cache.get('781283271635632138').send('');
+    client.channels.cache.get('781283271635632138').send('**2. Kto jest Twoją ulubioną postacią z Trzeciej Ery? Wybór proszę uzasadnić.**');
 })
 
 client.on('message', message => {
+
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
