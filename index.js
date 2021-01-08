@@ -14,14 +14,21 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 var schedule = require('node-schedule');
-var date = new Date(2021, 0, 5, 15, 0, 0);
+var date = new Date(2021, 0, 8, 17, 0, 0);
 
 client.once('ready', () => {
     console.log('Ready!');
 });
 
-var j = schedule.scheduleJob(date, function() {
-    client.channels.cache.get('781283271635632138').send('**2. Kto jest Twoją ulubioną postacią z Trzeciej Ery? Wybór proszę uzasadnić.**');
+const PostacEmbed = new Discord.MessageEmbed()
+    .setTitle('Nowy embed')
+    .setDescription('Dzisiaj na celowniku mamy Golluma / Smeagola! Chętnych do stworzenia jego historii zapraszamy do wysyłania kluczowych informacji o tej postaci oraz do podjęcia decyzji o najlepszej jego grafice.')
+    .setImage('https://pyxis.nymag.com/v1/imgs/5d4/f6e/c6aeaba039ba41d69a9dbce8c3523ec471-11-gollum.rsquare.w1200.jpg')
+    .setFooter('Tawerna Fantastyki, Sekcja Śródziemia')
+    .setThumbnail('https://cdn.discordapp.com/attachments/484655342400307211/795401844112883742/pierscien.png')
+
+let j = schedule.scheduleJob(date, function() {
+    client.channels.cache.get('781283271635632138').send(PostacEmbed);
 })
 
 client.on('message', message => {
