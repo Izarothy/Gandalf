@@ -36,7 +36,7 @@ let p = schedule.scheduleJob('* 20 * * *', function() {
         .setImage('https://bi.im-g.pl/im/1f/4e/12/z19197727V,Premier-Beata-Szydlo-i-czlonkowie-jej-gabinetu-prz.jpg')
         .setFooter('Tawerna Fantastyki, Polityka')
     client.channels.cache.get('613987578567196712').send(kadencjaEmbed);
-})
+});
 
 client.on('message', message => {
 
