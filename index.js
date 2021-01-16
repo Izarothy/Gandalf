@@ -19,7 +19,7 @@ client.once('ready', () => {
     console.log('Ready!');
 });
 
-let p = schedule.scheduleJob('* 20 * * *', function() {
+var p = schedule.scheduleJob('* 20 * * *', function() {
     const liczbaDuda = 1679;
     const liczbaPis = 1034;
     var now = new Date();
