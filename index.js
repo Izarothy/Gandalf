@@ -32,7 +32,9 @@ let j = schedule.scheduleJob(date, function() {
 })
 
 client.on('message', message => {
-
+    if (message.content.startsWith('Panda' || 'panda')) {
+        message.channel.send('<@514320067970727947> naucz się kultury chamie');
+    }
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/);
