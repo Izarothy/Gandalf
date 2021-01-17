@@ -18,10 +18,10 @@ var schedule = require('node-schedule');
 client.once('ready', () => {
     console.log('Ready!');
 });
-var d = schedule.scheduleJob('* 0 7 * * *', function() {
+var d = schedule.scheduleJob('0 0 7 * * *', function() {
     client.channels.cache.get('484645229371064334').send('Dzień Dobry Tawerna!');
 })
-var p = schedule.scheduleJob('* 0 20 * * *', function() {
+var p = schedule.scheduleJob('0 0 20 * * *', function() {
     const liczbaDuda = 1679;
     const liczbaPis = 1034;
     var now = new Date();
