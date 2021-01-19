@@ -42,6 +42,11 @@ var p = schedule.scheduleJob('0 0 20 * * *', function() {
 
 client.on('message', message => {
 
+    if (message.content === 'Witam' || message.content === 'witam') {
+        if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841') return;
+        message.channel.send('Wita to się gospodarz <:hyhy:569817926325108756> ')
+    }
+
     if (message.content === 'Thauron' || message.content === 'thauron') {
         message.channel.send('PIJEMY?');
     }
