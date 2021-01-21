@@ -40,17 +40,23 @@ var p = schedule.scheduleJob('0 0 20 * * *', function() {
     client.channels.cache.get('613987578567196712').send(kadencjaEmbed);
 });
 
+client.on('messageUpdate', (oldMessage, newMessage) => {
+    if (newMessage.content.endsWith('.') && newMessage.author.id == '514320067970727947') {
+        newMessage.delete();
+    }
+})
+
 client.on('message', message => {
 
-    if (message.content === 'lolol') {
-        client.channels.cache.get('484645229371064334').send('Pippin śmierdzi');
-    }
     if (message.content === 'Witam' || message.content === 'witam') {
-        if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841') return;
+        if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841' || message.author.id == '327533594622951428') return;
         message.channel.send('Wita to się gospodarz <:hyhy:569817926325108756> ')
     }
+    if (message.content.endsWith('.') && message.author.id == '514320067970727947') {
+        message.delete();
+    }
 
-    if (message.content === 'Thauron' || message.content === 'thauron') {
+    if (message.content === 'Thauron') {
         message.channel.send('PIJEMY?');
     }
 
@@ -68,4 +74,6 @@ client.on('message', message => {
         message.reply('there was an error trying to execute that command!');
     }
 });
+
+
 client.login(config.token)
