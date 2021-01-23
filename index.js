@@ -51,6 +51,10 @@ client.on('message', message => {
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
+    if (message.content.startsWith('XDDD')) {
+        message.channel.send('XD');
+    }
+
     if (message.content === 'Witam' || message.content === 'witam') {
         if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841' || message.author.id == '327533594622951428') return;
         message.channel.send('Wita to się gospodarz <:hyhy:569817926325108756> ')
