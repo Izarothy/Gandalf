@@ -49,7 +49,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 client.on('message', message => {
 
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (message.author.bot) return;
 
     if (message.content.startsWith('XDDD')) {
         message.channel.send('XD');
@@ -63,7 +63,7 @@ client.on('message', message => {
         message.delete();
     }
 
-    if (message.content === 'Thauron') {
+    if (message.content.toLowerCase() === 'thauron') {
         message.channel.send('PIJEMY?');
     }
 
