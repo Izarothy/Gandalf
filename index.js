@@ -2,7 +2,8 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const config = require('./config.json');
-const { prefix, token } = require('./config.json');
+const { prefix } = require('./config.json');
+const token = require
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -47,6 +48,8 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 })
 
 client.on('message', message => {
+
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     if (message.content === 'Witam' || message.content === 'witam') {
         if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841' || message.author.id == '327533594622951428') return;
