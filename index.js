@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 const fs = require('fs');
+require("dotenv").config();
 const Discord = require('discord.js');
 const config = require('./config.json');
 const { prefix } = require('./config.json');
-const token = require
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -79,4 +79,4 @@ client.on('message', message => {
 });
 
 
-client.login(config.token)
+client.login(process.env.TOKEN)
