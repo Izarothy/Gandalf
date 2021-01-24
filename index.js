@@ -79,4 +79,4 @@ client.on('message', message => {
 });
 
 
-client.login(process.env.CLIENT_TOKEN)
+client.login('Nzk1MzA2MDAzMjkzMjc0MTEy.X_Hcbw.RBNL7IcMLCd0dh1BBZT3Rb4jnu8')
