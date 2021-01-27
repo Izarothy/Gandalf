@@ -18,6 +18,7 @@ var schedule = require('node-schedule');
 
 client.once('ready', () => {
     console.log('Ready!');
+    client.channels.cache.get('804090885355864064').send('Działam już.')
 });
 var d = schedule.scheduleJob('0 0 7 * * *', function() {
     client.channels.cache.get('484645229371064334').send('Dzień Dobry Tawerna!');
