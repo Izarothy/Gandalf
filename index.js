@@ -53,7 +53,7 @@ client.on('message', message => {
 
     if (message.author.bot) return;
 
-    if (message.content.includes('pijemy')) {
+    if (message.content.toLowerCase().includes('pijemy')) {
         message.channel.send('THAURON?');
     }
     if (message.content === 'Witam' || message.content === 'witam') {
