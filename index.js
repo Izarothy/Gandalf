@@ -63,6 +63,13 @@ client.on('message', message => {
     if (message.content.endsWith('.') && message.author.id == '514320067970727947') {
         message.delete();
     }
+    if (message.content.toLowerCase().includes('chamie') && message.author.id == '514320067970727947') {
+        message.delete();
+        message.reply('Sam jesteś cham, chamie.')
+        let rola = '781254407320895488'
+        message.member.roles.add(rola);
+
+    }
 
     if (message.content.toLowerCase() === 'thauron') {
         message.channel.send('PIJEMY?');
