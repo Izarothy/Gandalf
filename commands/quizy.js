@@ -33,11 +33,6 @@ module.exports = {
 :one::one: ${quiz11} - 40 pytań `)
             .setFooter('Tawerna Fantastyki, Sekcja Śródziemie')
             .setImage('https://media.discordapp.net/attachments/584007309114736650/802942411990368286/Ciemna_mapa_Srodziemia.jpg?width=1082&height=676')
-        let kanal = message.channel.id;
-        if (kanal != ('484683452206153729' || '484683503016083458' || '781283271635632138')) {
-            return;
-        } else {
-            message.channel.send(QuizyEmbed);
-        }
+        message.channel.send(QuizyEmbed);
     },
 };
