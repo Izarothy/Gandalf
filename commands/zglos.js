@@ -23,7 +23,7 @@ module.exports = {
                 const QuizEmbed = new Discord.MessageEmbed()
                     .setTitle(`Ogłoszono nowy quiz!`)
                     .setFooter(`Tawerna Fantastyki`)
-                    .setImage('https://images.squarespace-cdn.com/content/v1/5a173f16ace86416b07c25f1/1513939530902-DILPHAAJ9F0DI627449M/ke17ZwdGBToddI8pDm48kK0QKSDttGV1ap9dyeIseHF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0mxU0godxi02JM9uVemPLqw3ZQRv6tY2V6nZIOWGhJ3qaH6uCpMgOc4rPl-G2eiFCQ/fantasy+album+cover6+-+in+wide+format.jpg?format=1500w')
+                    .setImage('https://cdn.discordapp.com/attachments/804090885355864064/807342167000612904/758007.jpg')
                     .addFields({ name: 'Prowadzący: ', value: argumenty[0], inline: true }, { name: 'Sekcja: ', value: argumenty[1], inline: true }, { name: 'Data i godzina: ', value: argumenty[2], inline: true }, { name: 'Opis: ', value: argumenty[3], })
                 client.channels.cache.get('804038483810713650').send(QuizEmbed);
             })
