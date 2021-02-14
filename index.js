@@ -18,7 +18,6 @@ var schedule = require('node-schedule');
 
 client.once('ready', () => {
     console.log('Ready!');
-    client.channels.cache.get('804090885355864064').send('Działam już.')
 });
 
 var d = schedule.scheduleJob('0 0 7 * * *', function() {
@@ -38,12 +37,12 @@ var p = schedule.scheduleJob('0 0 20 * * *', function() {
         .setDescription('Zostało: **\n\n' +
             zostaloDuda + ' **dni do końca kadencji Andrzeja Dudy \n' +
             'oraz **' + zostaloPis + '** dni do końca kadencji obecnego sejmu.')
-        .setImage('https://bi.im-g.pl/im/1f/4e/12/z19197727V,Premier-Beata-Szydlo-i-czlonkowie-jej-gabinetu-prz.jpg')
+        .setImage('https://ocdn.eu/pulscms-transforms/1/3TuktkpTURBXy84NzQ5ZmE3OTk4YTcyY2I5NWY0NTkzNjQ2ODA1NWM4OS5qcGeSlQPNAQsAzQQqzQJYkwXNAaTNASw')
         .setFooter('Tawerna Fantastyki, Polityka')
     client.channels.cache.get('613987578567196712').send(kadencjaEmbed);
 });
 
-client.on('messageUpdate', (oldMessage, newMessage) => {
+client.on('messageUpdate', (message, newMessage) => {
     if (newMessage.content.endsWith('.') && newMessage.author.id == '514320067970727947') {
         newMessage.delete();
     }
@@ -53,9 +52,6 @@ client.on('message', message => {
 
     if (message.author.bot) return;
 
-    if (message.content.toLowerCase().includes('pijemy')) {
-        message.channel.send('THAURON?');
-    }
     if (message.content === 'Witam' || message.content === 'witam') {
         if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841' || message.author.id == '327533594622951428') return;
         message.channel.send('Wita to się gospodarz <:hyhy:569817926325108756> ')
@@ -69,10 +65,6 @@ client.on('message', message => {
         let rola = '781254407320895488'
         message.member.roles.add(rola);
 
-    }
-
-    if (message.content.toLowerCase() === 'thauron') {
-        message.channel.send('PIJEMY?');
     }
 
     if (!message.content.startsWith(prefix)) return;
