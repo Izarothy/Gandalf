@@ -7,7 +7,7 @@ module.exports = {
         client.channels.cache.get('601363034908131328').send('__**Spis przydatnych komend do MC:**__: \
         \n \n :one: **Sadzenie i WorldEdit** \
         \n Sadzenie np. pszenicy: \
-        \n ``/mask >farmland``` - ustawienie maski pędzla, żeby malował tylko na farmlandzie \
+        \n ``/mask >farmland`` - ustawienie maski pędzla, żeby malował tylko na farmlandzie \
         \n ``/brush cyl x(blok) y(promień pędzla)`` - pędzel, który będzie malował używając maski z powyżej \
         \n I klikamy prawym, przykładowy użytek: ``/brush cyl 59:7 5`` - malowanie urośniętej pszenicy z promieniem 5. \
         \n \n **ID nasion: ** \
