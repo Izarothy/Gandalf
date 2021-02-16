@@ -4,7 +4,7 @@ module.exports = {
     description: 'Lista komend do MC',
     execute(message, args, client) {
         const Discord = require('discord.js');
-        client.channels.cache.get('600767010317795331').send('__**Spis przydatnych komend do MC:**__: \
+        client.channels.cache.get('601363034908131328').send('__**Spis przydatnych komend do MC:**__: \
         \n \n :one: **Sadzenie i WorldEdit** \
         \n Sadzenie np. pszenicy: \
         \n ``/mask >farmland``` - ustawienie maski pędzla, żeby malował tylko na farmlandzie \
