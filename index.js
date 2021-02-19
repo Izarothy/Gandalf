@@ -35,9 +35,9 @@ var p = schedule.scheduleJob('0 0 20 * * *', function() {
     let zostaloPis = liczbaPis - day;
     const kadencjaEmbed = new Discord.MessageEmbed()
         .setDescription('Zostało: **\n\n' +
-            zostaloDuda + ' **dni do końca kadencji Andrzeja Dudy \n' +
-            'oraz **' + zostaloPis + '** dni do końca kadencji obecnego sejmu.')
-        .setImage('https://ocdn.eu/pulscms-transforms/1/3TuktkpTURBXy84NzQ5ZmE3OTk4YTcyY2I5NWY0NTkzNjQ2ODA1NWM4OS5qcGeSlQPNAQsAzQQqzQJYkwXNAaTNASw')
+            zostaloDuda + ' ** - prezydent-rezydent tyle ma jeszcze chwil. \n' +
+            'A pisowskie śmiecie będą rządzić jeszcze przez tylko **' + zostaloPis + '** dni!')
+        .setImage('https://cdn.discordapp.com/attachments/584007309114736650/812222588775432192/unknown.png')
         .setFooter('Tawerna Fantastyki, Polityka')
     client.channels.cache.get('613987578567196712').send(kadencjaEmbed);
 });
