@@ -24,22 +24,11 @@ var d = schedule.scheduleJob('0 0 7 * * *', function() {
     client.channels.cache.get('484645229371064334').send('Dzień Dobry Tawerna!');
 })
 var p = schedule.scheduleJob('0 0 20 * * *', function() {
-    const liczbaDuda = 1679;
-    const liczbaPis = 1034;
     var now = new Date();
     var start = new Date(now.getFullYear(), 0, 0);
     var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay);
-    let zostaloDuda = liczbaDuda - day;
-    let zostaloPis = liczbaPis - day;
-    const kadencjaEmbed = new Discord.MessageEmbed()
-        .setDescription('Zostało: **\n\n' +
-            zostaloDuda + ' ** - prezydent-rezydent tyle ma jeszcze chwil. \n' +
-            'A pisowskie śmiecie będą rządzić jeszcze przez tylko **' + zostaloPis + '** dni!')
-        .setImage('https://cdn.discordapp.com/attachments/584007309114736650/812222588775432192/unknown.png')
-        .setFooter('Tawerna Fantastyki, Polityka')
-    client.channels.cache.get('613987578567196712').send(kadencjaEmbed);
 });
 
 client.on('messageUpdate', (message, newMessage) => {
