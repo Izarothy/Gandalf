@@ -16,7 +16,7 @@ module.exports = {
         \n Marchew - 141:x, tak jak wyżej \
         \n \n Można też robić miksowane pole, np. używając ``/brush cyl 59:1,59:2,59:3,59:4 5`` - będzie kilka etapów. \
         \n \n :two: **Reszta komend** \
-        \n ``/lotr time set (day/night lub liczba)`` - ustawienie pory dnia w Śródziemiu \
+        \n ``/lotr_time set (day/night lub liczba)`` - ustawienie pory dnia w Śródziemiu \
         \n ``/gamerule randomTickSpeed (od 0 do 1000)`` - prędkość wykonywania się rzeczy np. rośnięcia drzew lub pszenicy \
         ')
     },
