@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 const Discord = require('discord.js');
 module.exports = {
-    name: 'likwidacja',
-    description: 'Eliminacja',
+    name: 'eliminate',
+    description: 'Elimination',
     async execute(message, args, client) {
         const members = await message.guild.members.fetch()
         const ta = members.find((mem) => {
