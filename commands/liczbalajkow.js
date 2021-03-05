@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 let listaLike = []
 let listaDislike = []
 module.exports = {
-    name: 'liczbalajko',
+    name: 'liczbalajkow',
     description: 'Mems reaction count',
     async execute(message, args, client) {
         await client.channels.cache.get('484659760201728001').messages.fetch({ limit: 100, before: args[0], })
