@@ -23,7 +23,7 @@ module.exports = {
                 const QuizEmbed = new Discord.MessageEmbed()
                     .setTitle(`Ogłoszono nowy quiz!`)
                     .setFooter(`Tawerna Fantastyki`)
-                    .setImage('https://cdn.discordapp.com/attachments/804090885355864064/807342167000612904/758007.jpg')
+                    .setImage('https://www.barnesandnoble.com/blog/sci-fi-fantasy/wp-content/uploads/sites/4/2017/05/lotr.jpg')
                     .addFields({ name: 'Prowadzący: ', value: argumenty[0], inline: true }, { name: 'Sekcja: ', value: argumenty[1], inline: true }, { name: 'Data i godzina: ', value: argumenty[2], inline: true }, { name: 'Opis: ', value: argumenty[3], })
                 client.channels.cache.get('804038483810713650').send(QuizEmbed);
             })
