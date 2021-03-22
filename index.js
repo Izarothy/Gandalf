@@ -59,8 +59,9 @@ client.on('message', message => {
         if (message.author.id == '297508865891762176' || message.author.id == '219486784499875841' || message.author.id == '327533594622951428') return;
         message.channel.send('Wita to się gospodarz <:hyhy:569817926325108756> ')
     }
-    if (message.content.endsWith('.') && message.author.id == '514320067970727947') {
-        message.delete();
+    if (message.author.id == '514320067970727947') {
+        if (message.content.endsWith('.') || (message.content.includes('tenor.com'))) {
+        message.delete(); }
     }
     if (message.content === 'beza') {
         message.channel.send('https://static.smaker.pl/photos/1/0/c/10ce9c79704da425b1137eb609b9eff4_369483_5b3d0a0b217ef_wm.jpg')
@@ -70,8 +71,6 @@ client.on('message', message => {
         message.reply('Sam jesteś cham, chamie.')
         let rola = '781254407320895488'
         message.member.roles.add(rola);
-
-
     }
 
     if (!message.content.startsWith(prefix)) return;
