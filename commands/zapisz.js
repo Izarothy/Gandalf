@@ -5,7 +5,7 @@ module.exports = {
     description: 'Zapisywanie kogoś',
 
     execute (message, args) {
-        let rolaGracz = message.guild.roles.cache.find(role => role.name === "Rivendell");
+        let rolaGracz = message.guild.roles.cache.find(role => role.name === "Gracz");
         let klient = message.mentions.members.first()
         
         klient.roles.add(rolaGracz)
