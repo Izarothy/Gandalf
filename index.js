@@ -4,8 +4,6 @@ require("dotenv").config();
 const Discord = require("discord.js");
 const config = require("./config.json");
 const { prefix } = require("./config.json");
-const Cat = require("./models/cat.js");
-const mongoose = require("mongoose");
 const channels = require("./json/channels.json");
 
 const client = new Discord.Client();
@@ -13,24 +11,6 @@ client.commands = new Discord.Collection();
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
-
-mongoose.connect(
-  "mongodb+srv://tescik:" +
-    process.env.HASLO +
-    "@cluster0.4whmg.mongodb.net/Data",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
-mongoose.connection.on("connected", (xd) =>
-  console.log("Connected to mongoDB")
-);
-async function func() {
-  const cat = await Cat.findOne({ title: "info z bazy!!!" });
-  let tytul = cat["title"];
-  let zdjecie = cat["image"];
-  client.channels.cache
-    .get("484645229371064334")
-    .send(tytul + " - tytuł \n" + "<" + zdjecie + ">" + " - zdjecie");
-}
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -47,16 +27,6 @@ client.once("ready", () => {
 
 var d = schedule.scheduleJob("0 0 7 * * *", function () {
   client.channels.cache.get("484645229371064334").send("Dzień Dobry Tawerna!");
-});
-var p = schedule.scheduleJob("0 0 20 * * *", function () {
-  var now = new Date();
-  var start = new Date(now.getFullYear(), 0, 0);
-  var diff =
-    now -
-    start +
-    (start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000;
-  var oneDay = 1000 * 60 * 60 * 24;
-  var day = Math.floor(diff / oneDay);
 });
 
 client.on("messageUpdate", (message, newMessage) => {
@@ -142,7 +112,7 @@ client.on("message", (message) => {
     client.commands.get(command).execute(message, args, client);
   } catch (error) {
     console.error(error);
-    message.reply("there was an error trying to execute that command!");
+    message.reply("Command error!");
   }
 });
 
