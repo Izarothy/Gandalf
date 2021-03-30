@@ -59,6 +59,13 @@ client.on("voiceStateUpdate", (oldState, newState) => {
         }
       }
     });
+  } else if (newUserChannel === null) {
+    channels.voice.map((b, ind) => {
+      if (b === oldUserChannel.id) {
+        let old = client.channels.cache.get(channels.text[ind]);
+        old.createOverwrite(voicer, { VIEW_CHANNEL: false });
+      }
+    });
   }
   if (oldUserChannel === undefined || oldUserChannel === null) return;
   if (newUserChannel !== oldUserChannel) {
