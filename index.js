@@ -52,7 +52,6 @@ client.on("voiceStateUpdate", (oldState, newState) => {
       if (a === newUserChannel.id) {
         chan = client.channels.cache.get(channels.text[ind]);
         chan.createOverwrite(voicer, { VIEW_CHANNEL: true });
-        client.channels.cache.get(chan.id).send(voicer.toString() + " wszedł");
       }
       if (oldUserChannel !== null) {
         if (a === oldUserChannel.id) {
@@ -65,7 +64,6 @@ client.on("voiceStateUpdate", (oldState, newState) => {
       if (b === oldUserChannel.id) {
         let old = client.channels.cache.get(channels.text[ind]);
         old.createOverwrite(voicer, { VIEW_CHANNEL: false });
-        client.channels.cache.get(old.id).send(voicer.toString() + " wyszedł");
       }
     });
     return;
@@ -73,7 +71,6 @@ client.on("voiceStateUpdate", (oldState, newState) => {
   if (oldUserChannel === undefined || oldUserChannel === null) return;
   if (newUserChannel !== oldUserChannel && newUserChannel !== undefined) {
     stary.createOverwrite(voicer, { VIEW_CHANNEL: false });
-    client.channels.cache.get(stary.id).send(voicer.toString() + " wyszedł");
   }
 });
 
