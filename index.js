@@ -5,9 +5,9 @@ const Discord = require("discord.js");
 const config = require("./config.json");
 const { prefix } = require("./config.json");
 const channels = require("./json/channels.json");
-
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -52,6 +52,7 @@ client.on("voiceStateUpdate", (oldState, newState) => {
       if (a === newUserChannel.id) {
         chan = client.channels.cache.get(channels.text[ind]);
         chan.createOverwrite(voicer, { VIEW_CHANNEL: true });
+        client.channels.cache.get(chan.id).send(voicer.toString() + " wszedł");
       }
       if (oldUserChannel !== null) {
         if (a === oldUserChannel.id) {
@@ -64,18 +65,34 @@ client.on("voiceStateUpdate", (oldState, newState) => {
       if (b === oldUserChannel.id) {
         let old = client.channels.cache.get(channels.text[ind]);
         old.createOverwrite(voicer, { VIEW_CHANNEL: false });
+        client.channels.cache.get(old.id).send(voicer.toString() + " wyszedł");
       }
     });
+    return;
   }
   if (oldUserChannel === undefined || oldUserChannel === null) return;
-  if (newUserChannel !== oldUserChannel) {
+  if (newUserChannel !== oldUserChannel && newUserChannel !== undefined) {
     stary.createOverwrite(voicer, { VIEW_CHANNEL: false });
+    client.channels.cache.get(stary.id).send(voicer.toString() + " wyszedł");
   }
 });
 
 client.on("message", (message) => {
   if (message.author.bot) return;
 
+  if (message.channel.id === "484659760201728001") {
+    if (
+      message.content.match(/\.(jpeg|jpg|gif|png|mp4)$/) !== null ||
+      message.content.includes("youtube.com") ||
+      message.attachments.size > 0
+    ) {
+      message.react("👍");
+      message.react("👎");
+      return;
+    } else {
+      message.delete();
+    }
+  }
   if (message.content === "Witam" || message.content === "witam") {
     if (
       message.author.id == "297508865891762176" ||
