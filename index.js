@@ -81,7 +81,8 @@ client.on("message", (message) => {
     if (
       message.content.match(/\.(jpeg|jpg|gif|png|mp4)$/) !== null ||
       message.content.includes("youtube.com") ||
-      message.attachments.size > 0
+      message.attachments.size > 0 ||
+      message.content.startsWith("https://")
     ) {
       message.react("👍");
       message.react("👎");
