@@ -98,7 +98,9 @@ client.on("message", (message) => {
       message.author.id == "327533594622951428"
     )
       return;
-    message.channel.send("Wita to się gospodarz <:hyhy:569817926325108756> ");
+    for (let i = 1; i < 5; i++) {
+      message.author.send("NIE SPAMUJ CHUJU ");
+    }
   }
   if (message.author.id == "514320067970727947") {
     if (
