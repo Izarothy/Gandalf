@@ -98,8 +98,14 @@ client.on("message", (message) => {
       message.author.id == "327533594622951428"
     )
       return;
-    for (let i = 1; i < 5; i++) {
-      message.author.send("NIE SPAMUJ CHUJU ");
+    if (
+      message.author.id === "514320067970727947" ||
+      message.author.id === "284038235364130817" ||
+      message.author.id === "589749718305865733"
+    ) {
+      for (let i = 1; i < 5; i++) {
+        message.author.send("NIE SPAMUJ CHUJU ");
+      }
     }
   }
   if (message.author.id == "514320067970727947") {
