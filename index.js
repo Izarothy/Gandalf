@@ -8,6 +8,13 @@ const channels = require("./json/channels.json");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+// Mongo
+const { MongoClient } = require('mongodb');
+const { cursorTo } = require("readline");
+const uri = `mongodb+srv://${process.env.USERNAMEDB}:${process.env.PASSWORD}@cluster0.4whmg.mongodb.net/$${process.env.DBNAME}?retryWrites=true&w=majority`
+const clientDB = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Reading the commands folder
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -17,17 +24,22 @@ for (const file of commandFiles) {
 
   client.commands.set(command.name, command);
 }
-var schedule = require("node-schedule");
-const { deepEqual } = require("assert");
-const { title } = require("process");
 
 client.once("ready", () => {
   console.log("Ready!");
 });
 
-var d = schedule.scheduleJob("0 0 7 * * *", function () {
-  client.channels.cache.get("484645229371064334").send("Dzień Dobry Tawerna!");
-});
+const sendData = (url) => {
+  clientDB.connect(err => {
+    if (err) console.log(err);
+  
+  let myobj = { url: url, title: "Mem bez nazwy"}
+  clientDB.db("Data").collection("Memes").insertOne(myobj, (err) => {
+    if (err) console.log(err);
+
+  })
+  })}
+
 
 client.on("messageUpdate", (message, newMessage) => {
   if (
@@ -77,58 +89,34 @@ client.on("voiceStateUpdate", (oldState, newState) => {
 client.on("message", (message) => {
   if (message.author.bot) return;
 
-  if (message.channel.id === "484659760201728001") {
-    if (
-      message.content.match(/\.(jpeg|jpg|gif|png|mp4)$/) !== null ||
-      message.content.includes("youtube.com") ||
-      message.attachments.size > 0 ||
-      message.content.startsWith("https://")
-    ) {
+  if (message.channel.id === config.meme_id) {
+    if (message.content.includes("youtube.com") || message.content.match(/\.(gif|mp4)$/)) {
       message.react("👍");
       message.react("👎");
       return;
-    } else {
-      message.delete();
     }
+
+    if (message.attachments.size > 0) {
+      message.react("👍");
+      message.react("👎");
+      message.attachments.map((attach) => {
+        sendData(attach.url)
+      })
+    return;
   }
-  if (message.content === "Witam" || message.content === "witam") {
+
     if (
-      message.author.id == "297508865891762176" ||
-      message.author.id == "219486784499875841" ||
-      message.author.id == "327533594622951428"
-    )
+      message.content.match(/\.(jpeg|jpg|png)$/)
+    ) {
+      message.react("👍");
+      message.react("👎");
+      sendData(message.content)
       return;
-    if (
-      message.author.id === "514320067970727947" ||
-      message.author.id === "284038235364130817" ||
-      message.author.id === "589749718305865733"
-    ) {
-      for (let i = 1; i < 5; i++) {
-        message.author.send("NIE SPAMUJ CHUJU ");
-      }
     }
-  }
-  if (message.author.id == "514320067970727947") {
-    if (
-      message.content.endsWith(".") ||
-      message.content.includes("tenor.com")
-    ) {
+    
+      else {
       message.delete();
     }
-  }
-  if (message.content === "beza") {
-    message.channel.send(
-      "https://static.smaker.pl/photos/1/0/c/10ce9c79704da425b1137eb609b9eff4_369483_5b3d0a0b217ef_wm.jpg"
-    );
-  }
-  if (
-    message.content.toLowerCase().includes("chamie") &&
-    message.author.id == "514320067970727947"
-  ) {
-    message.delete();
-    message.reply("Sam jesteś cham, chamie.");
-    let rola = "781254407320895488";
-    message.member.roles.add(rola);
   }
 
   if (!message.content.startsWith(prefix)) return;
