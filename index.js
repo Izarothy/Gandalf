@@ -10,7 +10,6 @@ client.commands = new Discord.Collection();
 
 // Mongo
 const { MongoClient } = require('mongodb');
-const { cursorTo } = require("readline");
 const uri = `mongodb+srv://${process.env.USERNAMEDB}:${process.env.PASSWORD}@cluster0.4whmg.mongodb.net/$${process.env.DBNAME}?retryWrites=true&w=majority`
 const clientDB = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -25,10 +24,15 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
+// Startup log and message
 client.once("ready", () => {
-  console.log("Ready!");
+  console.log("The bot is working.");
+  client.users.fetch('297508865891762176').then((user) => {
+    user.send(`I'm working.`)
+  })
 });
 
+// Function to insert an object containing sent meme
 const sendData = (url) => {
   clientDB.connect(err => {
     if (err) console.log(err);
@@ -49,83 +53,87 @@ client.on("messageUpdate", (message, newMessage) => {
     newMessage.delete();
   }
 });
-let chan;
-let stary;
+
+// Assign a text channel to a voice channel
 client.on("voiceStateUpdate", (oldState, newState) => {
   let newUserChannel = newState.channel;
   let oldUserChannel = oldState.channel;
-  let voicer = newState.member;
+  let newUser = newState.member;
+  let old;
   if (
     oldUserChannel !== newUserChannel &&
     newUserChannel !== undefined &&
-    newUserChannel !== null
-  ) {
-    channels.voice.map((a, ind) => {
-      if (a === newUserChannel.id) {
-        chan = client.channels.cache.get(channels.text[ind]);
-        chan.createOverwrite(voicer, { VIEW_CHANNEL: true });
+    newUserChannel !== null) {
+    channels.voice.map((channel, ind) => {
+      if (channel === newUserChannel.id) {
+        let chan = client.channels.cache.get(channels.text[ind]);
+        chan.createOverwrite(newUser, { VIEW_CHANNEL: true });
+        console.log(`I've added permissions for ${newUser.displayName} (channel ${chan})`)
       }
-      if (oldUserChannel !== null) {
-        if (a === oldUserChannel.id) {
-          stary = client.channels.cache.get(channels.text[ind]);
-        }
+      if (oldUserChannel !== null && channel === oldUserChannel.id) {
+          return old = client.channels.cache.get(channels.text[ind]);
       }
     });
   } else if (newUserChannel === null) {
-    channels.voice.map((b, ind) => {
-      if (b === oldUserChannel.id) {
-        let old = client.channels.cache.get(channels.text[ind]);
-        old.createOverwrite(voicer, { VIEW_CHANNEL: false });
+    channels.voice.map((channel, ind) => {
+      if (channel === oldUserChannel.id) {
+        old = client.channels.cache.get(channels.text[ind]);
+        old.createOverwrite(newUser, { VIEW_CHANNEL: false });
+        console.log(`I've removed permissions for ${newUser.displayName} (channel ${old})`)
       }
     });
     return;
   }
   if (oldUserChannel === undefined || oldUserChannel === null) return;
   if (newUserChannel !== oldUserChannel && newUserChannel !== undefined) {
-    stary.createOverwrite(voicer, { VIEW_CHANNEL: false });
+    old.createOverwrite(newUser, { VIEW_CHANNEL: false });
+    console.log(`I've removed permissions for ${newUser.displayName} (channel ${old})`)
   }
 });
 
 client.on("message", (message) => {
+  //To prevent looping
   if (message.author.bot) return;
 
+  //A function to react to memes
+  const memeReact = () => {
+    message.react("👍");
+    message.react("👎");
+  }
+
+  //Check meme channel and react appropriately
+
+
+  //Video 
   if (message.channel.id === config.meme_id) {
     if (message.content.includes("youtube.com") || message.content.match(/\.(gif|mp4)$/)) {
-      message.react("👍");
-      message.react("👎");
-      return;
-    }
-
-    if (message.attachments.size > 0) {
-      message.react("👍");
-      message.react("👎");
-      message.attachments.map((attach) => {
-        sendData(attach.url)
-      })
-    return;
-  }
-
-    if (
-      message.content.match(/\.(jpeg|jpg|png)$/)
-    ) {
-      message.react("👍");
-      message.react("👎");
-      sendData(message.content)
-      return;
-    }
+      memeReact();
+      return; }
     
+    // Image attachment
+    if (message.attachments.size > 0) {
+      memeReact();
+      message.attachments.map((attach) => {
+        sendData(attach.url)})
+        return; }
+      
+    // Image link
+    if (message.content.match(/\.(jpeg|jpg|png)$/)) {
+      memeReact();
+      sendData(message.content)
+      return;} 
+
       else {
-      message.delete();
-    }
-  }
+      message.delete(); }}
 
+  //Check if message is a command
   if (!message.content.startsWith(prefix)) return;
-
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (!client.commands.has(command)) return;
 
+  //Read commands
+  if (!client.commands.has(command)) return;
   try {
     client.commands.get(command).execute(message, args, client);
   } catch (error) {
@@ -134,4 +142,5 @@ client.on("message", (message) => {
   }
 });
 
+//Log in with environmental data
 client.login(process.env.CLIENT_TOKEN);
