@@ -27,9 +27,6 @@ for (const file of commandFiles) {
 // Startup log and message
 client.once("ready", () => {
   console.log("The bot is working.");
-  client.users.fetch('297508865891762176').then((user) => {
-    user.send(`I'm working.`)
-  })
 });
 
 // Function to insert an object containing sent meme
@@ -43,16 +40,6 @@ const sendData = (url) => {
 
   })
   })}
-
-
-client.on("messageUpdate", (message, newMessage) => {
-  if (
-    newMessage.content.endsWith(".") &&
-    newMessage.author.id == "514320067970727947"
-  ) {
-    newMessage.delete();
-  }
-});
 
 // Assign a text channel to a voice channel
 client.on("voiceStateUpdate", (oldState, newState) => {
@@ -95,6 +82,17 @@ client.on("message", (message) => {
   //To prevent looping
   if (message.author.bot) return;
 
+  if (message.channel.id === '720305252800266341') {
+    if (!message.content.startsWith('http')) return;
+      clientDB.connect(err => {
+        if (err) console.log(err);
+      
+      let myobj = { url: message.content }
+      clientDB.db("Data").collection("lotrArts").insertOne(myobj, (err) => {
+        if (err) console.log(err);
+      })
+      })
+  }
   //A function to react to memes
   const memeReact = () => {
     message.react("👍");
