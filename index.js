@@ -15,7 +15,6 @@ const commandFiles = fs
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-
   client.commands.set(command.name, command);
 }
 
@@ -27,7 +26,7 @@ client.once("ready", () => {
     return await pageTextChannel.messages.fetch({});
   }
 
-  const sendDailyPage = schedule.scheduleJob('* 16 * * *', () => {
+  const sendDailyPage = schedule.scheduleJob('0 16 * * *', () => {
     fetchMessages().then(messages => {
       let todaysMessage = messages.last()
       todaysPage = todaysMessage.content;
@@ -95,13 +94,11 @@ client.on("message", (message) => {
     if (message.content.includes("youtube.com") || message.content.match(/\.(gif|mp4)$/)) {
       memeReact();
       return; }
-    
-    // Image attachment
+
     if (message.attachments.size > 0) {
       memeReact();
         return; }
-      
-    // Image link
+
     if (message.content.match(/\.(jpeg|jpg|png)$/)) {
       memeReact();
       return} 
@@ -109,13 +106,10 @@ client.on("message", (message) => {
       else {
       message.delete(); }}
 
-  //Check if message is a command
   if (!message.content.startsWith(prefix)) return;
   const args = message.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
 
-
-  //Read commands
   if (!client.commands.has(command)) return;
   try {
     client.commands.get(command).execute(message, args, client);
