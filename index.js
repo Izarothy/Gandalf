@@ -7,13 +7,8 @@ const { prefix } = require("./config.json");
 const channels = require("./json/channels.json");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+const schedule = require('node-schedule')
 
-// Mongo
-const { MongoClient } = require('mongodb');
-const uri = `mongodb+srv://${process.env.USERNAMEDB}:${process.env.PASSWORD}@cluster0.4whmg.mongodb.net/$${process.env.DBNAME}?retryWrites=true&w=majority`
-const clientDB = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-// Reading the commands folder
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -24,22 +19,28 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-// Startup log and message
 client.once("ready", () => {
   console.log("The bot is working.");
-});
+  const fetchMessages = async () => {
+    const pageTextChannelID = '874210436394917928';
+    const pageTextChannel = client.channels.cache.get(pageTextChannelID);
+    return await pageTextChannel.messages.fetch({});
+  }
 
-// Function to insert an object containing sent meme
-const sendData = (url) => {
-  clientDB.connect(err => {
-    if (err) console.log(err);
-  
-  let myobj = { url: url, title: "Mem bez nazwy"}
-  clientDB.db("Data").collection("Memes").insertOne(myobj, (err) => {
-    if (err) console.log(err);
-
+  const sendDailyPage = schedule.scheduleJob('* 16 * * *', () => {
+    fetchMessages().then(messages => {
+      let todaysMessage = messages.last()
+      todaysPage = todaysMessage.content;
+      todaysMessage.delete();
+      const dailyEmbed = new Discord.MessageEmbed()
+    .setThumbnail('https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1354628173l/16234338.jpg')
+    .setTitle('**Tłumaczenie HoME - Tom XII**')
+    .setDescription(todaysPage)
+    .setFooter('Jeśli chcesz nam pomóc przy tłumaczeniu, śmiało - jeśli trzeba będzie coś zrobić, będzie to napisane na kanale.')
+    const channel = client.channels.cache.get('781283271635632138'); 
+    channel.send(dailyEmbed)})
   })
-  })}
+});
 
 // Assign a text channel to a voice channel
 client.on("voiceStateUpdate", (oldState, newState) => {
@@ -79,20 +80,8 @@ client.on("voiceStateUpdate", (oldState, newState) => {
 });
 
 client.on("message", (message) => {
-  //To prevent looping
   if (message.author.bot) return;
 
-  if (message.channel.id === '720305252800266341') {
-    if (!message.content.startsWith('http')) return;
-      clientDB.connect(err => {
-        if (err) console.log(err);
-      
-      let myobj = { url: message.content }
-      clientDB.db("Data").collection("lotrArts").insertOne(myobj, (err) => {
-        if (err) console.log(err);
-      })
-      })
-  }
   //A function to react to memes
   const memeReact = () => {
     message.react("👍");
@@ -100,7 +89,6 @@ client.on("message", (message) => {
   }
 
   //Check meme channel and react appropriately
-
 
   //Video 
   if (message.channel.id === config.meme_id) {
@@ -111,15 +99,12 @@ client.on("message", (message) => {
     // Image attachment
     if (message.attachments.size > 0) {
       memeReact();
-      message.attachments.map((attach) => {
-        sendData(attach.url)})
         return; }
       
     // Image link
     if (message.content.match(/\.(jpeg|jpg|png)$/)) {
       memeReact();
-      sendData(message.content)
-      return;} 
+      return} 
 
       else {
       message.delete(); }}
@@ -140,5 +125,4 @@ client.on("message", (message) => {
   }
 });
 
-//Log in with environmental data
 client.login(process.env.CLIENT_TOKEN);
