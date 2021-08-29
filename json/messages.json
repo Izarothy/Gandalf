@@ -1,0 +1,8 @@
+{
+    "minecraft": {
+        "title": "**Informacje o serwerze Minecraft Śródziemie**",
+        "description": "\n\n=============================\n**1.7.10 Survival/RP \nNon-premium\nIP: minecraft-srodziemie.tasrv.com\nMody: <https://bit.ly/3gHQPmd>**\n=============================\n\n__**NIEDOŚWIADCZENI Z MINECRAFTEM**__\n:one:  Jeśli nie posiadasz Javy, zainstaluj ją z <https://www.java.com/download/ie_manual.jsp>. Jeśli nie jesteś pewien, przejdź dalej.\n:two:  Pobierz i zainstaluj launcher Minecrafta (zalecany jest <https://tlauncher.org/en/#osselector> - robi znaczną część roboty za nas)\n:three:  Po włączeniu launchera, skonfiguruj swoje konto, jeśli masz oficjalną kopię gry, zaloguj się, jeśli nie - wpisz swój nick.\n:four:  Wybierz wersję gry Forge 1.7.10 i kliknij Enter the game.\n:five:  Włącz launcher ponownie, tym razem kliknij w ikonkę folderu :file_folder: , przejdź do folderu **mods** i wrzuć tam wszystkie pliki pobrane z linku na samej górze (jest to kilkanaście plików .jar)\n:six:  To wszystko! Włącz Minecrafta, wybierz tryb multiplayer, dodaj serwer z IP minecraft-srodziemie.tasrv.com (w dolnej rubryce) i dołącz. Miłej gry!\n\n\nJeśli chcesz wspomóc serwer finansowo, masz propozycję, utknąłeś na instalacji, masz problem techniczny lub nie możesz wejść na serwer, pisz do mnie (<@297508865891762176>) lub na kanale <#600767010317795331> - chętnie pomogę.",
+        "thumbnail": "https://static.wikia.nocookie.net/lotrminecraftmod/images/2/2e/2014-07-14_21.39.15.png/revision/latest?cb=20150304160150",
+        "color": "F08D49"
+    }
+}
