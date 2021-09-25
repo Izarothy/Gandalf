@@ -44,7 +44,7 @@ client.on("messageCreate", (message) => {
   }
 
   if (message.channel.id === config.meme_id) {
-    if (message.content.includes('http')) {
+    if (message.content.includes('http') || message.attachments.size > 0) {
       reactToAMeme();
     }
       else {
