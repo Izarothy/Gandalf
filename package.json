@@ -24,5 +24,9 @@
     "url": "https://github.com/Izarothy/dyskusja-bot/issues"
   },
   "homepage": "https://github.com/Izarothy/dyskusja-bot#readme",
-  "description": ""
+  "description": "",
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
+  }
 }
