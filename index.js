@@ -10,6 +10,10 @@ client.once("ready", () => {
   console.log("The bot is working.");
 })
 
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ', err);
+});
+
 // Assign a text channel to a voice channel
 client.on("voiceStateUpdate", (previousVoiceState, currentVoiceState) => {
   let currentVoiceChannel = currentVoiceState.channel;
