@@ -42,7 +42,7 @@ const messageTimeAfter = '0 0 15 * * *';
 
 const jobBefore = schedule.scheduleJob(messageTimeBefore, async () => {
   if (quoteInProgress) {
-    client.channels.fetch(channels.testChannel).then((channel) => {
+    client.channels.fetch(channels.dyskusjaTolkien).then((channel) => {
       channel.send('Nikt nie podał poprawnej odpowiedzi.');
     });
     quoteInProgress = false;
@@ -59,7 +59,7 @@ const jobAfter = schedule.scheduleJob(messageTimeAfter, async () => {
       .setDescription(quote.question)
       .setFooter('Kto pierwszy napisze poprawne imię, wygrywa.');
     client.channels
-      .fetch(channels.testChannel)
+      .fetch(channels.dyskusjaTolkien)
       .then((channel) => channel.send({ embeds: [quoteEmbed] }));
     quoteInProgress = true;
   }
@@ -115,7 +115,7 @@ client.on('messageCreate', (message) => {
     Database.addQuote(question, answer);
     message.delete();
   }
-  if (message.channel.id === channels.testChannel && quoteInProgress) {
+  if (message.channel.id === channels.dyskusjaTolkien && quoteInProgress) {
     (async () => {
       if (message.content === quote.answer) {
         message.react('🎉');
