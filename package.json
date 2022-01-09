@@ -1,5 +1,5 @@
 {
-  "name": "dyskusja-bot",
+  "name": "gandalf-bot",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -11,19 +11,13 @@
   "dependencies": {
     "discord.js": "^13.1.0",
     "dotenv": "^8.2.0",
-    "mongoose": "^5.11.15",
+    "mongoose": "^5.13.13",
     "ms": "^2.1.3",
+    "node-schedule": "^2.1.0",
+    "npm": "^8.3.0",
     "sequelize": "^6.5.0",
     "sqlite3": "^5.0.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Izarothy/dyskusja-bot.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Izarothy/dyskusja-bot/issues"
-  },
-  "homepage": "https://github.com/Izarothy/dyskusja-bot#readme",
   "description": "",
   "engines": {
     "node": "16.x",
