@@ -26,18 +26,6 @@ client.once('ready', () => {
   console.log('The bot is working.');
 });
 
-mongoose
-  .connect(process.env.mongoDB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(async () => {
-    console.log('MongoDB connected.');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
 process.on('uncaughtException', (err) => {
   console.log('Caught exception: ', err);
 });
