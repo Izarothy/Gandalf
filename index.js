@@ -32,36 +32,33 @@ process.on('uncaughtException', (err) => {
 
 // Assign a text channel to a voice channel
 client.on('voiceStateUpdate', (previousVoiceState, currentVoiceState) => {
-  let currentVoiceChannel = currentVoiceState.channel;
-  let previousVoiceChannel = previousVoiceState.channel;
-  let voiceChannelUser = currentVoiceState.member;
+  const currentVC = currentVoiceState.channel;
+  const previousVC = previousVoiceState.channel;
+  const voiceUser = currentVoiceState.member;
 
-  if (currentVoiceChannel === null || currentVoiceChannel === undefined) {
-    let previousChannelIndex = channels.voice.indexOf(previousVoiceChannel.id);
-    let previousTextChannel = client.channels.cache.get(
-      channels.text[previousChannelIndex]
+  // Leaves voice chat
+  if (!currentVC) {
+    const previousText = client.channels.cache.get(
+      channels.voicePairs.find((chan) => chan.voice === previousVC.id).text
     );
-    previousTextChannel.permissionOverwrites.delete(voiceChannelUser);
-    return;
+    return previousText.permissionOverwrites.delete(voiceUser);
   }
 
-  if (currentVoiceChannel !== previousVoiceChannel) {
-    let voiceChannelIndex = channels.voice.indexOf(currentVoiceChannel.id);
-    let currentTextChannel = client.channels.cache.get(
-      channels.text[voiceChannelIndex]
+  // Joins voice chat
+  if (currentVC !== previousVC) {
+    const currentText = client.channels.cache.get(
+      channels.voicePairs.find((chan) => chan.voice == currentVC.id).text
     );
-    currentTextChannel.permissionOverwrites.create(voiceChannelUser, {
+    currentText.permissionOverwrites.create(voiceUser, {
       VIEW_CHANNEL: true,
     });
 
-    if (previousVoiceChannel) {
-      let previousChannelIndex = channels.voice.indexOf(
-        previousVoiceChannel.id
+    // Changes voice channels - remove view for previous channel
+    if (previousVC) {
+      const previousText = client.channels.cache.get(
+        channels.voicePairs.find((chan) => chan.voice === previousVC.id).text
       );
-      let previousTextChannel = client.channels.cache.get(
-        channels.text[previousChannelIndex]
-      );
-      previousTextChannel.permissionOverwrites.delete(voiceChannelUser);
+      previousText.permissionOverwrites.delete(voiceUser);
     }
   }
 });
