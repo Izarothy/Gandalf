@@ -30,39 +30,6 @@ process.on('uncaughtException', (err) => {
   console.log('Caught exception: ', err);
 });
 
-// Assign a text channel to a voice channel
-client.on('voiceStateUpdate', (previousVoiceState, currentVoiceState) => {
-  const currentVC = currentVoiceState.channel;
-  const previousVC = previousVoiceState.channel;
-  const voiceUser = currentVoiceState.member;
-
-  // Leaves voice chat
-  if (!currentVC) {
-    const previousText = client.channels.cache.get(
-      channels.voicePairs.find((chan) => chan.voice === previousVC.id).text
-    );
-    return previousText.permissionOverwrites.delete(voiceUser);
-  }
-
-  // Joins voice chat
-  if (currentVC !== previousVC) {
-    const currentText = client.channels.cache.get(
-      channels.voicePairs.find((chan) => chan.voice == currentVC.id).text
-    );
-    currentText.permissionOverwrites.create(voiceUser, {
-      VIEW_CHANNEL: true,
-    });
-
-    // Changes voice channels - remove view for previous channel
-    if (previousVC) {
-      const previousText = client.channels.cache.get(
-        channels.voicePairs.find((chan) => chan.voice === previousVC.id).text
-      );
-      previousText.permissionOverwrites.delete(voiceUser);
-    }
-  }
-});
-
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
 
