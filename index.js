@@ -36,10 +36,10 @@ client.on('messageCreate', (message) => {
   if (message.channel.id === config.meme_id) {
     if (message.content.includes('http') || message.attachments.size > 0) {
       message.react('👍');
-      message.react('👎');
-    } else {
-      message.delete();
+      return message.react('👎')
     }
+    message.channel.send(`<@${message.author.id}>, wiadomości na tym kanale mogą zawierać tylko link lub załącznik`)
+    message.delete();
   }
 });
 
